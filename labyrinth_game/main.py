@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from .constants import DIRECTIONS
 from .player_actions import get_input, move_player, show_inventory, take_item, use_item
 from .utils import attempt_open_treasure, describe_current_room, show_help, solve_puzzle
 
@@ -25,13 +26,14 @@ def main():
         
         process_command(game_state, command)
 
-def process_command(game_state, command):
+def process_command(game_state, command, direction_list = DIRECTIONS):
     """
     Фукнция для обработки пользовательских команд
     
     Параметры:
         game_state - словарь, содержит информацию о состоянии игрока
         command - строка, содержит ввод пользователя
+        direction_list = строка, содержит возможные направления перемещения
     """
     commands = command.strip().lower().split()
 
@@ -39,6 +41,9 @@ def process_command(game_state, command):
         return 
 
     user_command = commands[0]
+    if user_command in DIRECTIONS:
+        move_player(game_state, user_command)
+        return
 
     match user_command:
         case 'look':

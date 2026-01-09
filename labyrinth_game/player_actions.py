@@ -1,7 +1,7 @@
 # labyrinth_game/player_actions.py
 
 from .constants import ROOMS
-from .utils import attempt_open_treasure, describe_current_room
+from .utils import attempt_open_treasure, describe_current_room, random_event
 
 
 def show_inventory(game_state):
@@ -40,9 +40,20 @@ def move_player(game_state, direction):
     curr_room = ROOMS[curr_room_name]
 
     if direction in curr_room['exits']:
-        game_state['current_room'] = curr_room['exits'][direction]
+        next_room = curr_room['exits'][direction]
+
+        if next_room == 'treasure_room':
+            if 'rusty_key' in game_state['player_inventory']:
+                print("Вы используете ржавый ключ, "
+                    "чтобы открыть дверь в комнату сокровищ.")
+            else:
+                print("Дверь заперта. Нужен ключ, чтобы пройти дальше.")
+                return
+
+        game_state['current_room'] = next_room
         game_state['steps_taken'] += 1
         describe_current_room(game_state)
+        random_event(game_state)
     else:
         print("Нельзя пойти в этом направлении.")
 
