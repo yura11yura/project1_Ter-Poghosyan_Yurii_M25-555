@@ -28,7 +28,7 @@
 
 # Демонстрация игрового процесса
 
-`https://asciinema.org/a/OKPl7i2DiDSx81HL`
+[![asciicast](https://asciinema.org/a/OKPl7i2DiDSx81HL.svg)](https://asciinema.org/a/OKPl7i2DiDSx81HL)
 
 
 
