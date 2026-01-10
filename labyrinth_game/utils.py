@@ -2,7 +2,14 @@
 
 import math
 
-from .constants import ALT_ANSWERS, COMMANDS, DEATH_THRESHOLD, DEFAULT_MODULO, ROOMS
+from .constants import (
+    ALT_ANSWERS,
+    COMMANDS,
+    DEATH_THRESHOLD,
+    DEFAULT_MODULO,
+    EVENT_PROBABILITY,
+    ROOMS,
+)
 
 
 def describe_current_room(game_state):
@@ -164,7 +171,7 @@ def random_event(game_state):
     Параметры:
         game_state - словарь, содержит информацию о состоянии игрока
     """
-    event_chance = pseudo_random(game_state['steps_taken'], DEFAULT_MODULO)
+    event_chance = pseudo_random(game_state['steps_taken'], EVENT_PROBABILITY)
 
     if event_chance == 0:
         event = pseudo_random(game_state['steps_taken'] + 1, 3)
